@@ -121,10 +121,12 @@
       });
 
       //add any other events that would trigger thumbnail display (resize, etc)
-
       _this.element.find('.thumbnail-image').on('click', function() {
         var canvasID = jQuery(this).attr('data-image-id');
         _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, canvasID);
+      });
+      _this.element.on('dragstart', '.thumbnail-image', function(ev) {
+        ev.originalEvent.dataTransfer.setData('text/plain', _this.manifest.uri + '?' + jQuery.param({ manifest: _this.manifest.uri, canvas: jQuery(this).attr('data-image-id') }));
       });
     },
 

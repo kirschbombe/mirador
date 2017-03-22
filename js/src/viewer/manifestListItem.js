@@ -177,6 +177,9 @@
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
       });
+      this.element.on('dragstart', '.preview-image', function(ev) {
+        ev.originalEvent.dataTransfer.setData('text/plain', _this.manifest.uri + '?' + jQuery.param({ manifest: _this.manifest.uri, canvas: jQuery(this).attr('data-image-id') }));
+      });
     },
 
     updateDisplay: function(newWidth) {
